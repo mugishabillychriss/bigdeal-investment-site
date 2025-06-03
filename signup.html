@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Big Deal Signup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-green-100 flex justify-center items-center min-h-screen">
+  <div class="bg-white p-6 rounded-xl shadow-xl w-full max-w-sm">
+    <h2 class="text-2xl font-bold text-center mb-4">Create a Big Deal Account</h2>
+    <form id="signupForm" class="space-y-4">
+      <input type="email" id="email" placeholder="Email" class="w-full p-2 border rounded" required/>
+      <input type="password" id="password" placeholder="Password" class="w-full p-2 border rounded" required/>
+      <button class="w-full bg-green-600 text-white py-2 rounded" type="submit">Sign Up</button>
+    </form>
+    <p class="text-sm text-center mt-4">Already have an account? <a href="login.html" class="text-green-700">Login</a></p>
+  </div>
+
+  <script type="module">
+    import { signup } from './js/auth.js';
+
+    const form = document.getElementById('signupForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = form.email.value;
+      const password = form.password.value;
+      try {
+        await signup(email, password);
+        alert('Account created! Please login.');
+        window.location.href = 'login.html';
+      } catch (err) {
+        alert("Signup failed: " + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

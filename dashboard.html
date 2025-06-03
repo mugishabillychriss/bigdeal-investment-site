@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Big Deal Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <nav class="bg-white shadow-md py-4 px-8 flex justify-between">
+    <h1 class="text-xl font-bold text-green-700">Big Deal</h1>
+    <div>
+      <button id="logoutBtn" class="text-red-500 hover:underline">Logout</button>
+    </div>
+  </nav>
+
+  <section class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <div class="bg-white p-4 rounded shadow">
+      <img src="images/product1.jpg" class="rounded mb-2" alt="Product 1">
+      <h2 class="font-bold">Crypto Portfolio</h2>
+      <p>Invest in top cryptocurrencies.</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow">
+      <img src="images/product2.jpg" class="rounded mb-2" alt="Product 2">
+      <h2 class="font-bold">Real Estate Fund</h2>
+      <p>Secure investments in real estate.</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow">
+      <img src="images/product3.jpg" class="rounded mb-2" alt="Product 3">
+      <h2 class="font-bold">Green Energy Bonds</h2>
+      <p>Support sustainable energy projects.</p>
+    </div>
+  </section>
+
+  <script type="module">
+    import { logout, listenToAuthChanges } from './js/auth.js';
+
+    listenToAuthChanges((user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await logout();
+    });
+  </script>
+</body>
+</html>
